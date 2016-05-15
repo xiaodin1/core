@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.longruan.core.dao.OnlineMapper" >
+  <resultMap id="BaseResultMap" type="com.longruan.core.model.Online" >
+    <id column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, ip, loginTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_online
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_online
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.longruan.core.model.Online" >
+    insert into sys_online (userId, ip, loginTime
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{logintime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longruan.core.model.Online" >
+    insert into sys_online
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="logintime != null" >
+        loginTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longruan.core.model.Online" >
+    update sys_online
+    <set >
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null" >
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longruan.core.model.Online" >
+    update sys_online
+    set ip = #{ip,jdbcType=VARCHAR},
+      loginTime = #{logintime,jdbcType=TIMESTAMP}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

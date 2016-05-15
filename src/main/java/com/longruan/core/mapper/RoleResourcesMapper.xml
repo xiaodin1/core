@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.longruan.core.dao.RoleResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.longruan.core.model.RoleResources" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="roleId" property="roleid" jdbcType="VARCHAR" />
+    <result column="resourcesId" property="resourcesid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roleId, resourcesId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_resources
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_role_resources
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.longruan.core.model.RoleResources" >
+    insert into sys_role_resources (id, roleId, resourcesId
+      )
+    values (#{id,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR}, #{resourcesid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.longruan.core.model.RoleResources" >
+    insert into sys_role_resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleid != null" >
+        roleId,
+      </if>
+      <if test="resourcesid != null" >
+        resourcesId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesid != null" >
+        #{resourcesid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.longruan.core.model.RoleResources" >
+    update sys_role_resources
+    <set >
+      <if test="roleid != null" >
+        roleId = #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesid != null" >
+        resourcesId = #{resourcesid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.longruan.core.model.RoleResources" >
+    update sys_role_resources
+    set roleId = #{roleid,jdbcType=VARCHAR},
+      resourcesId = #{resourcesid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
